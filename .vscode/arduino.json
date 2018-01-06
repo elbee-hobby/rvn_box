@@ -1,0 +1,5 @@
+{
+    "board": "adafruit:avr:protrinket5",
+    "sketch": "revan.ino",
+    "port": "/dev/ttyS0"
+}
