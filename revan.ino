@@ -24,15 +24,18 @@ void setup() {
 
 
 void loop() {
+
   Effects effects(Neopixels::instance, Ring::Red);
   while (true) {
-      // .flash(Ring::Blue, 2, 4, 100, 300)
-      // .display(BlueRing).pause(2000)
-      // .fade(Ring::Red, 20).pause(2000)
-      // .fade(Ring::Blue, 20).pause(2000)
-      // .fade(Ring::BlueRed, 20)
-      // .rotate(3, 120)
-      // .fade(Ring::Purple, 20);
+    effects
+      .pause(1000)
+      .flash_transition(Ring::Blue)
+      .pause(3000)
+      .fade(Ring::Purple, 20)
+      .pause(3000)
+      .flash_transition(Ring::Red)
+      .pause(3000)
+      .fade(Ring::Purple, 20);
   }
 }
 

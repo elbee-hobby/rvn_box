@@ -14,8 +14,16 @@ static uint32_t pixel_interpolation(Adafruit_NeoPixel& neopixels, uint32_t start
     0);
 }
 
-Effects::Effects(Adafruit_NeoPixel& pixels, const Ring_t& ring) {
-    display(ring, 0);
+Effects::Effects(Adafruit_NeoPixel& pixels, const Ring_t& ring):
+    neopixels(pixels),
+    current_ring(&ring)
+{
+        
+    for (uint8_t i = 0; i < pixels.numPixels(); ++i) {
+      pixels.setPixelColor(i, ring[i]);
+    }
+    pixels.show();
+    //display(ring, 0);
 }
 
 static void display_colors(Adafruit_NeoPixel& neopixels, const Ring_t& ring) {
@@ -75,4 +83,17 @@ Effects& Effects::flash(const Ring_t& flash_ring,
 Effects& Effects::pause(int dt) {
     delay(dt);
     return *this;
+}
+
+
+Effects& Effects::flash_transition(const Ring_t& end_ring) {
+    Ring_t start_ring;
+    memcpy(start_ring, current_ring, sizeof(start_ring));
+    return this
+      ->flash(end_ring, 1, 2, 1000, 3000)
+      .flash(end_ring, 2, 4, 50, 200)
+      .pause(500)
+      .flash(end_ring, 1, 2, 300, 2000)
+      .display(end_ring, 500)
+      .flash(start_ring, 1, 3, 500, 3000);
 }

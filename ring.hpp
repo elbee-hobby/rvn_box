@@ -1,8 +1,6 @@
 #pragma once
 
-#include <Adafruit_NeoPixel.h>
-
-#define NUMPIXELS 16
+#include "neopixel.hpp"
 
 using Ring_t = uint32_t[NUMPIXELS];
 
