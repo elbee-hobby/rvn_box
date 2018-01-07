@@ -1,5 +1,5 @@
 #include "neopixel.hpp"
-#include "ring.hpp"
+#include "neopixel-ring-config.h"
 
 #define PIN 6
 
