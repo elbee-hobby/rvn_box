@@ -30,13 +30,22 @@ void setup() {
 
 void loop() {
 
-  AnimationCycle cycle(Neopixels::instance, 60);
+  AnimationCycle cycle(Neopixels::instance, 1000);
   cycle.build_from(presets.blue_red())
-    .wait(2000)
-    .fade_to(presets.red(), 10000)
-    .wait(3000)
-    .fade_to(presets.blue_red(), 3000);
-
+    .wait(random(2000, 6000))
+    .fade_to(presets.red(), random(4000, 10000))
+    .wait(random(2000, 6000))
+    .flicker_to(presets.blue())
+    .wait(random(3000, 4000))
+    .fade_to(presets.blue_red(), random(1000, 10000))
+    .wait(random(2000, 6000))
+    .fade_to(presets.blue(), random(4000, 10000))
+    .wait(random(2000, 6000))
+    .fade_to(presets.blue_red(), random(1000, 10000));
+//  cycle.build_from(presets.blue())
+//       .wait(1000)
+//       .flicker_to(presets.red())
+//       .wait(5000);
   while (true) {
     cycle.start();
   }

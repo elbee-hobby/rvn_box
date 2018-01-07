@@ -74,7 +74,7 @@ Effects& Effects::flash(const Ring_t& flash_ring,
         display_colors(neopixels, flash_ring);
         delay(random(30, 101));
         display_colors(neopixels, *current_ring);
-        delay(random(min_flash_delay, max_flash_count + 1));
+        delay(random(min_flash_delay, max_flash_delay + 1));
     }
            
     return *this;

@@ -36,3 +36,15 @@ private:
     Ring_t* ring_;
     unsigned int ms_;
 };
+
+class Flash: public Animation {
+public:
+    Flash(const Ring_t& ring, unsigned int ms_flash);
+
+    bool is_finished(unsigned int ms_since_animation_start);
+
+    uint32_t get_color(uint8_t pixel_index, Adafruit_NeoPixel& neopixels, unsigned int ms_since_animation_start, const Ring_t& base_color);
+private:
+    Ring_t* ring_;
+    unsigned int ms_flash_;
+};

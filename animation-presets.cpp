@@ -54,3 +54,18 @@ bool Fade::is_finished(unsigned int ms_since_animation_start) {
 uint32_t Fade::get_color(uint8_t pixel_index, Adafruit_NeoPixel& neopixels, unsigned int ms_since_animation_start, const Ring_t& base_color) {
     return pixel_interpolation(neopixels, base_color[pixel_index], (*ring_)[pixel_index], float(ms_since_animation_start) / float(ms_));
 }
+
+
+Flash::Flash(const Ring_t& ring, unsigned int ms_flash)
+    : Animation(),
+    ring_(&ring),
+    ms_flash_(ms_flash)
+{}
+
+bool Flash::is_finished(unsigned int ms_since_animation_start) {
+    return ms_since_animation_start > ms_flash_;
+}
+
+uint32_t Flash::get_color(uint8_t pixel_index, Adafruit_NeoPixel& neopixels, unsigned int ms_since_animation_start, const Ring_t& base_color) {
+    return is_finished(ms_since_animation_start) ? base_color[pixel_index] : (*ring_)[pixel_index];
+}
