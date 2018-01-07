@@ -31,8 +31,11 @@ void setup() {
 void loop() {
 
   AnimationCycle cycle(Neopixels::instance, 60);
-  cycle.set_up(presets.blue_red())
-    .then(new Wait(1000));
+  cycle.build_from(presets.blue_red())
+    .wait(1000)
+    .set_color(presets.red())
+    .wait(1000);
+
   while (true) {
     cycle.start();
   }
