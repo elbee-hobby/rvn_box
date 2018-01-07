@@ -1,4 +1,5 @@
 #include "animation-cycle.hpp"
+#include "colors.hpp"
 
 Animation::Animation()
     : next_(nullptr)
@@ -29,7 +30,7 @@ bool StaticRing::is_finished(unsigned int ms_since_animation_start) {
     return true;
 }
 
-uint8_t StaticRing::get_color(uint8_t pixel_index, unsigned int ms_since_animation_start, const Ring_t& base_color) {
+uint32_t StaticRing::get_color(uint8_t pixel_index, unsigned int ms_since_animation_start, const Ring_t& base_color) {
     return (*ring_)[pixel_index];
 }
 
@@ -42,7 +43,7 @@ bool Wait::is_finished(unsigned int ms_since_animation_start) {
     return ms_since_animation_start > ms_wait_;
 }
 
-uint8_t Wait::get_color(uint8_t pixel_index, unsigned int ms_since_animation_start, const Ring_t& base_color) {
+uint32_t Wait::get_color(uint8_t pixel_index, unsigned int ms_since_animation_start, const Ring_t& base_color) {
     return base_color[pixel_index];
 }
 

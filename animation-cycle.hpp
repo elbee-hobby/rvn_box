@@ -14,7 +14,7 @@ public:
 
     Animation* next();
 
-    virtual uint8_t get_color(uint8_t pixel_index, unsigned int time_ms, const Ring_t& base_color) = 0;
+    virtual uint32_t get_color(uint8_t pixel_index, unsigned int time_ms, const Ring_t& base_color) = 0;
 
     void set_next(Animation *next);
 
@@ -28,7 +28,7 @@ public:
 
     bool is_finished(unsigned int ms_since_animation_start);
 
-    uint8_t get_color(uint8_t pixel_index, unsigned int ms_since_animation_start, const Ring_t& base_color);
+    uint32_t get_color(uint8_t pixel_index, unsigned int ms_since_animation_start, const Ring_t& base_color);
 private:
     Ring_t* ring_;
 };
@@ -39,7 +39,7 @@ public:
 
     bool is_finished(unsigned int ms_since_animation_start);
 
-    uint8_t get_color(uint8_t pixel_index, unsigned int ms_since_animation_start, const Ring_t& base_color);
+    uint32_t get_color(uint8_t pixel_index, unsigned int ms_since_animation_start, const Ring_t& base_color);
 private:
     unsigned int ms_wait_;
 };
