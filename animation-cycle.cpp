@@ -28,11 +28,6 @@ void AnimationCycle::start() {
         g_offset = now;
 
         if((now - last_update_time_) > frame_delay_) {
-            if (animation_ != last_frame_animation) {
-                last_frame_animation = animation_;
-                animation_start_time_ = now;
-            }
-
             if (update(now - animation_start_time_)) {
                 return;
             }
@@ -44,7 +39,7 @@ void AnimationCycle::start() {
 bool AnimationCycle::update(unsigned int ms_since_animation_start) {
     for (uint8_t i = 0; i < neopixels_.numPixels(); ++i){
         uint16_t pixel_index = (i + g_offset / 120) % neopixels_.numPixels();// + current_position_animation_.get_position_offset(frame_number)) % neopixels_.numPixels();
-        current_color_[pixel_index] = animation_->get_color(i, ms_since_animation_start, base_color_);
+        current_color_[pixel_index] = animation_->get_color(i, neopixels_, ms_since_animation_start, base_color_);
 
         neopixels_.setPixelColor(pixel_index, current_color_[i]);
     }
@@ -53,6 +48,7 @@ bool AnimationCycle::update(unsigned int ms_since_animation_start) {
     if (animation_->is_finished(ms_since_animation_start)) {
         memcpy(base_color_, current_color_, sizeof(base_color_));
         animation_ = animation_->next();
+        animation_start_time_ = millis();
     }
 
     return animation_ == nullptr;

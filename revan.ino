@@ -32,9 +32,10 @@ void loop() {
 
   AnimationCycle cycle(Neopixels::instance, 60);
   cycle.build_from(presets.blue_red())
-    .wait(4000)
-    .set_color(presets.red())
-    .wait(1000);
+    .wait(2000)
+    .fade_to(presets.red(), 10000)
+    .wait(3000)
+    .fade_to(presets.blue_red(), 3000);
 
   while (true) {
     cycle.start();

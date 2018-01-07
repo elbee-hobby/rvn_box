@@ -25,11 +25,12 @@ AnimationCycleBuilder& AnimationCycleBuilder::set_color(const Ring_t& ring) {
     return then(new StaticRing(ring));
 }
 
-AnimationCycleBuilder& AnimationCycleBuilder::fade_to(const Ring_t& ring) {
-
+AnimationCycleBuilder& AnimationCycleBuilder::fade_to(const Ring_t& ring, unsigned int ms_to_fade) {
+    return then(new Fade(ring, ms_to_fade));
 }
 
 AnimationCycleBuilder& AnimationCycleBuilder::flicker_to(const Ring_t& ring) {
+
 
 }
 
