@@ -1,10 +1,12 @@
 #include "animation-cycle.hpp"
 
+static unsigned long g_offset;
 
 AnimationCycle::AnimationCycle(Adafruit_NeoPixel& neopixels, int frames_per_second)
     : neopixels_(neopixels),
     frame_delay_ (1000 / frames_per_second)
-{}
+{
+}
 
 AnimationCycle::~AnimationCycle() {
     delete first_animation_;
@@ -23,6 +25,7 @@ void AnimationCycle::start() {
 
     while (true) {
         unsigned long now = millis();
+        g_offset = now;
 
         if((now - last_update_time_) > frame_delay_) {
             if (animation_ != last_frame_animation) {
@@ -40,10 +43,10 @@ void AnimationCycle::start() {
 
 bool AnimationCycle::update(unsigned int ms_since_animation_start) {
     for (uint8_t i = 0; i < neopixels_.numPixels(); ++i){
-        uint16_t pixel_index = i;// + current_position_animation_.get_position_offset(frame_number)) % neopixels_.numPixels();
-        current_color_[pixel_index] = animation_->get_color(pixel_index, ms_since_animation_start, base_color_);
+        uint16_t pixel_index = (i + g_offset / 120) % neopixels_.numPixels();// + current_position_animation_.get_position_offset(frame_number)) % neopixels_.numPixels();
+        current_color_[pixel_index] = animation_->get_color(i, ms_since_animation_start, base_color_);
 
-        neopixels_.setPixelColor(pixel_index, current_color_[pixel_index]);
+        neopixels_.setPixelColor(pixel_index, current_color_[i]);
     }
     neopixels_.show();
 
