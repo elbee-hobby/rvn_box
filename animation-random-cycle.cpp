@@ -5,7 +5,7 @@ const Ring_t& AnimationRandomCycle::get_random_color() {
     //exclude current color
     int old_color_index = color_index_;
     while (color_index_ == old_color_index) {
-        color_index_ = random(0, RingPresets::instance().get_preset_count() - 1);
+        color_index_ = random(0, RingPresets::instance().get_preset_count());
     }
     return RingPresets::instance().get(color_index_);
 }

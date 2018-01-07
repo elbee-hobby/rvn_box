@@ -21,3 +21,9 @@ inline uint8_t blue(uint32_t color)
 {
     return color & 0xFF;
 }
+
+// Returns the White component of a 32-bit color
+inline uint8_t white(uint32_t color)
+{
+    return (color >> 24) & 0xFF;
+}

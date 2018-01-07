@@ -11,7 +11,7 @@ static uint32_t pixel_interpolation(Adafruit_NeoPixel& neopixels, uint32_t start
     component_interpolation(red(start), red(end), percent),
     component_interpolation(green(start), green(end), percent),
     component_interpolation(blue(start), blue(end), percent),
-    0);
+    component_interpolation(white(start), white(end), percent));
 }
 
 StaticRing::StaticRing(const Ring_t& ring)

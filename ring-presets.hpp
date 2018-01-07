@@ -25,6 +25,7 @@ private:
     Ring_t blue_;
     Ring_t red_;
     Ring_t purple_;
+    Ring_t light_;
     Ring_t dark_;
 
     Ring_t* presets_[5];
