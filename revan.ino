@@ -9,6 +9,7 @@
 
 #include "ring.hpp"
 #include "neopixel.hpp"
+#include "animator.hpp"
 #include "animation-cycle.hpp"
 #include "ring-presets.hpp"
 
@@ -28,9 +29,10 @@ void setup() {
 
 
 void loop() {
+  Animator animator(Neopixels::instance, 1000);
 
-  AnimationCycle cycle(Neopixels::instance, 1000);
-  cycle.build_from(presets.blue_red())
+  AnimationCycle cycle;
+  cycle.start_from(presets.blue_red())
     .wait(random(2000, 6000))
     .fade_to(presets.red(), random(4000, 10000))
     .wait(random(2000, 6000))
@@ -41,9 +43,8 @@ void loop() {
     .fade_to(presets.blue(), random(4000, 10000))
     .wait(random(2000, 6000))
     .fade_to(presets.blue_red(), random(1000, 10000));
-  while (true) {
-    cycle.start();
-  }
+
+    animator.start(cycle);
 }
 
 
