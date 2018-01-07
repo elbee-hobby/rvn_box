@@ -10,9 +10,9 @@ public:
     ~AnimationCycle();
 
     AnimationCycleBuilder start_from(const Ring_t& start_color);
-    Animation* get_next_animation();
+    virtual Animation* get_next_animation();
     
-private:
+protected:
     Animation *first_animation_;
     Animation *animation_;
 };

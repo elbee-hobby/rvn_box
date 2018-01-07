@@ -1,6 +1,11 @@
 #include "ring-presets.hpp"
 #include "colors.hpp"
 
+RingPresets& RingPresets::instance() {
+    static RingPresets instance;
+    return instance;
+}
+
 RingPresets::init(Adafruit_NeoPixel& neopixels) {
     const uint32_t dark_pixel = 0;
     const uint32_t blue_pixel = neopixels.Color(0, 0, MaxBrightness, 0);
@@ -20,6 +25,19 @@ RingPresets::init(Adafruit_NeoPixel& neopixels) {
         blue_red_[i] = i % 8 < 2 ? dark_pixel : i >= neopixels.numPixels() / 2 ? red_pixel : blue_pixel;
     }
 
+    presets_[0] = &blue_red_;
+    presets_[1] = &blue_;
+    presets_[2] = &red_;
+    presets_[3] = &purple_;
+    presets_[4] = &dark_;
+}
+
+int RingPresets::get_preset_count() {
+    return 5;
+}
+
+const Ring_t& RingPresets::get(unsigned int i) {
+    return *presets_[i];
 }
 
 const Ring_t& RingPresets::blue_red() {

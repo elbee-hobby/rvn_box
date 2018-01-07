@@ -2,19 +2,30 @@
 #include "animation-presets.hpp"
 
 AnimationCycleBuilder::AnimationCycleBuilder()
-: last_animation_(nullptr)
+: first_(nullptr),
+  last_(nullptr)
 {}
 
 AnimationCycleBuilder& AnimationCycleBuilder::then(Animation* animation)
 {
-    last_animation_->set_next(animation);
-    last_animation_ = animation;
+    if (first_ == nullptr) {
+        first_ = animation;
+    }
+
+    if (last_ != nullptr) {
+        last_->set_next(animation);
+    }
+
+    last_ = animation;
     return *this;
 }
 
-Animation* AnimationCycleBuilder::init(const Ring_t& ring) {
-    last_animation_ = new StaticRing(ring);
-    return last_animation_;
+Animation* AnimationCycleBuilder::get_first_animation() {
+    return first_;
+}
+
+Animation* AnimationCycleBuilder::get_last_animation() {
+    return last_;
 }
 
 AnimationCycleBuilder& AnimationCycleBuilder::wait(unsigned int ms_wait) {
