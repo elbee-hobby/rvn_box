@@ -7,7 +7,6 @@
 #endif
 
 
-#include "effects.hpp"
 #include "ring.hpp"
 #include "neopixel.hpp"
 #include "animation-cycle.hpp"
@@ -42,10 +41,6 @@ void loop() {
     .fade_to(presets.blue(), random(4000, 10000))
     .wait(random(2000, 6000))
     .fade_to(presets.blue_red(), random(1000, 10000));
-//  cycle.build_from(presets.blue())
-//       .wait(1000)
-//       .flicker_to(presets.red())
-//       .wait(5000);
   while (true) {
     cycle.start();
   }
