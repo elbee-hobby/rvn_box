@@ -11,9 +11,9 @@
 #include "neopixel.hpp"
 #include "animator.hpp"
 #include "animation-cycle.hpp"
+#include "animation-random-cycle.hpp"
 #include "ring-presets.hpp"
 
-RingPresets presets;
 
 void setup() {
   // This is for Trinket 5V 16MHz, you can remove these three lines if you are not using a Trinket
@@ -24,27 +24,28 @@ void setup() {
 
   randomSeed(analogRead(0));
   Neopixels::instance.begin(); // This initializes the NeoPixel library.
-  presets.init(Neopixels::instance);
+  RingPresets::instance().init(Neopixels::instance);
 }
 
 
 void loop() {
   Animator animator(Neopixels::instance, 1000);
 
-  AnimationCycle cycle;
-  cycle.start_from(presets.blue_red())
-    .wait(random(2000, 6000))
-    .fade_to(presets.red(), random(4000, 10000))
-    .wait(random(2000, 6000))
-    .flicker_to(presets.blue())
-    .wait(random(3000, 4000))
-    .fade_to(presets.blue_red(), random(1000, 10000))
-    .wait(random(2000, 6000))
-    .fade_to(presets.blue(), random(4000, 10000))
-    .wait(random(2000, 6000))
-    .fade_to(presets.blue_red(), random(1000, 10000));
+  //AnimationCycle cycle;
+  //cycle.start_from(RingPresets::instance().blue_red())
+  //  .wait(random(2000, 6000))
+  //  .fade_to(RingPresets::instance().red(), random(4000, 10000))
+  //  .wait(random(2000, 6000))
+  //  .flicker_to(RingPresets::instance().blue())
+  //  .wait(random(3000, 4000))
+  //  .fade_to(RingPresets::instance().blue_red(), random(1000, 10000))
+  //  .wait(random(2000, 6000))
+  //  .fade_to(RingPresets::instance().blue(), random(4000, 10000))
+  //  .wait(random(2000, 6000))
+  //  .fade_to(RingPresets::instance().blue_red(), random(1000, 10000));
+  AnimationRandomCycle cycle;
 
-    animator.start(cycle);
+  animator.start(cycle);
 }
 
 

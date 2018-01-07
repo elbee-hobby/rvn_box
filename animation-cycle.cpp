@@ -15,7 +15,7 @@ AnimationCycle::~AnimationCycle() {
 
 AnimationCycleBuilder AnimationCycle::start_from(const Ring_t& start_color) {
     AnimationCycleBuilder builder;
-    first_animation_ = builder.init(start_color);
+    first_animation_ = builder.set_color(start_color).get_last_animation();
     animation_ = first_animation_;
     return builder;
 }
