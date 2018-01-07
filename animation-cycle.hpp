@@ -6,25 +6,13 @@
 
 class AnimationCycle {
 public:
-    AnimationCycle(Adafruit_NeoPixel& neopixels, int frames_per_second);
+    AnimationCycle();
     ~AnimationCycle();
 
-    AnimationCycleBuilder build_from(const Ring_t& start_color);
-
-    void start();
+    AnimationCycleBuilder start_from(const Ring_t& start_color);
+    Animation* get_next_animation();
     
 private:
-    bool update(unsigned int ms_since_animation_start);
-
-    Adafruit_NeoPixel& neopixels_;
-
-    const uint8_t frame_delay_;
-    unsigned long last_update_time_;
-    unsigned int animation_start_time_;
-
-    Ring_t current_color_;
-    Ring_t base_color_;
-
     Animation *first_animation_;
     Animation *animation_;
 };
